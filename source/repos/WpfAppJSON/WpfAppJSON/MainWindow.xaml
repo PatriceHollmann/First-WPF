@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:WpfAppJSON"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:WindowCommands.GetData" Executed="GetData_Executed"/>
+    </Window.CommandBindings>
     <Grid>
-        
+        <Button x:Name="button1" Width="60" Height="30" Content="Получение" Click="ButtonGet_Click" Margin="105,357,627,32" 
+                Command="local:WindowCommands.GetData" />
+        <Button x:Name="button2" Width="60" Height="30" Content="Выгрузка" Click="ButtonSend_Click" Margin="212,357,520,32" />
+        <ListBox Height="304" HorizontalAlignment="Left" Margin="8,14,0,0"
+
+                 Name="listBox" VerticalAlignment="Top" Width="774" />
     </Grid>
 </Window>
