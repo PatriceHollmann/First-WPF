@@ -6,11 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -52,6 +50,11 @@ namespace WpfAppJSON
 
             [JsonProperty("flors")]
             public long Flors { get; set; }
+
+            public override string ToString()
+            {
+                return Name;
+            }
         }
     }
     public class JSon2
@@ -84,6 +87,10 @@ namespace WpfAppJSON
 
             [JsonProperty("phones")]
             public Phone[] Phones { get; set; }
+            public override string ToString()
+            {
+                return Name;
+            }
         }
 
         public class Phone
@@ -95,92 +102,97 @@ namespace WpfAppJSON
             public string Value { get; set; }
         }
     }
-    public static class Methods
-        {
-        public static IEnumerable<T> DeserealizeJson<T>(this IEnumerable<string> en)
-        {
-            return en.Select(a => JsonConvert.DeserializeObject<T>(a));
-        }
-    }
-    public class Converter
-    {
-        List<string> strings = new List<string>();
-        public List<string> Reader(string path)
-        {
- 
-            //List<JSon2.Welcome> strings2 = new List<JSon2.Welcome>();
-            string json = null;
-            using (StreamReader sr = new StreamReader(path))
-            {
-                while (!sr.EndOfStream)
-                {
-                    while (!sr.ReadLine().Equals('/'))
-                    {
-                        var line = sr.ReadLine();
-                        json = line.TrimStart(new Char[] { '-' });
-                        JSon1.Welcome part1 = JsonConvert.DeserializeObject<JSon1.Welcome>(json);
-                      // Methods.DeserealizeJson<JSon1.Welcome>(json);
-                            strings.Add(part1.ToString());
-                    }
-                    sr.ReadLine().TrimStart(new Char[] { '/' });
-                    while (!sr.ReadLine().Equals('/'))
-                    {
-                        var line = sr.ReadLine();
-                        json = line.TrimStart(new Char[] { '-' });
-                        JSon2.Welcome part2 = JsonConvert.DeserializeObject<JSon2.Welcome>(json);
-                         strings.Add(part2.ToString());
-                    }
-                }
-            }
-            return strings;
-        }
-        public List<T> Writer(string path)
-        {
-            List<JSon1.Welcome> strings = new List<JSon1.Welcome>();
-            List<JSon2.Welcome> strings2 = new List<JSon2.Welcome>();
-            using (StreamWriter sw = new StreamWriter(path))
-            {
-                var convert1 = JsonConvert.SerializeObject(strings);
-                foreach (var item in convert1)
-                {
-                    sw.WriteLine(convert1);
-                }
-                    strings.Clear();
-                var convert2 = JsonConvert.SerializeObject(strings2);
-                foreach (var item in convert2)
-                {
-                    sw.WriteLine(convert2);
-                }
-                strings2.Clear(); 
-            }
-        }
-    }
+
     /// </summary>
     public partial class MainWindow : Window
     {
+        JSon1.Welcome houses = new JSon1.Welcome();
+        JSon2.Welcome users = new JSon2.Welcome();
+        List<string> ls = new List<string>();
+        public void Parsing()
+        {
+            using (StreamReader sr = new StreamReader("input"))
+            {
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine();
+                    if (line.StartsWith("-"))
+                    {
+                        line.Trim();
+                    }
+                    else
+                    {
+                        ls.Add(line);
+                    }
+                }
+                var desStringH = string.Join("", ls.TakeWhile(x => !x.StartsWith("/")).Where(y => !y.Contains("-")).ToList().ToArray());
+                houses = JsonConvert.DeserializeObject<JSon1.Welcome>(desStringH);
+
+                var desStringU = string.Join("", ls.SkipWhile(x => !x.StartsWith("/")).Where(y => !y.Contains("-")).ToList().ToArray());
+                users = JsonConvert.DeserializeObject<JSon2.Welcome>(desStringU);
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
         }
-        private void GetData(object sender, ExecutedRoutedEventArgs e)
+        private void ButtonGet_Click(object sender, System.EventArgs e)
         {
-            Converter cnv = new Converter();
-           // List<string> mas1 = new List<string>();
-            listBox.Items.Add(cnv.Reader("C\\Documents"));
-
-
+                Parsing();
+                //Добавлять строки
+                foreach (var nameH in houses.D.Items.Select(x => x.Name))
+                {
+                    listBox1.Items.Add(nameH);
+                }
+                foreach (var nameU in users.D.Items.Select(x => x.Name))
+                {
+                    listBox2.Items.Add(nameU);
+                }
+            //listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            ls.Clear();
         }
-        //private void ButtonGet_Click (object sender, System.EventArgs e)
-        //{
-           
-        //}
+
+        private void MenuEdit1_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 win1 = new Window1();
+            var a = listBox1.SelectedIndex;
+            win1.TxtBox10.Text = houses.D.Items.Select((x => x.Name)).ElementAt(a);
+            win1.TxtBox11.Text = houses.D.Items.Select((x => x.Address)).ElementAt(a);
+            win1.TxtBox12.Text = houses.D.Items.Select((x => x.Type)).ElementAt(a).ToString();
+            win1.TxtBox13.Text = houses.D.Items.Select((x => x.Flors)).ElementAt(a).ToString();
+            //win1.listBox2.Items.Add(houses.D.Items.Select((x => x.Name)).ElementAt(a));
+            win1.Show();
+        }
+        private void MenuEdit11_Click(object sender, RoutedEventArgs e)
+        {
+            var a = listBox1.SelectedIndex;
+            while (listBox1.SelectedItems.Count != 0)
+            {
+                listBox1.Items.Remove(listBox1.SelectedItems[0]);
+            }
+        }
+            private void ButtonSend_Click(object sender, System.EventArgs e)
+        {
+            //Добавлять строки в цикле
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                //ls1.Add(listBox1.Items[i].ToString());
+            }
+        }
+
+        private void listBox1_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
+            if (item != null)
+            {
+
+
+            }
+        }
     }
-    public class WindowCommands
+    public partial class Window1 : Window
     {
-        static WindowCommands()
-        {
-            GetData = new RoutedCommand("GetData", typeof(MainWindow));
-        }
-        public static RoutedCommand GetData { get; set; }
+        MainWindow mw = new MainWindow();
+
     }
 }
