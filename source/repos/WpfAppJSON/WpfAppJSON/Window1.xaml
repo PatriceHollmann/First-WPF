@@ -7,29 +7,40 @@
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
     <Grid>
-        <ListBox Height="128" HorizontalAlignment="Left" Margin="146,193,0,0"
-                 Name="listBox4" VerticalAlignment="Top" Width="492" >
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Удалить" CommandTarget="{Binding ElementName=listBox4}" Command="Delete">Remove item</MenuItem>
-                </ContextMenu>
-            </ListBox.ContextMenu>
-        </ListBox>
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="19,10,0,0"
-                 Name="TxtBox1" VerticalAlignment="Top" Width="122" Text="Имя" TextAlignment="Left"/>
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="19,50,0,0"
-            x:Name="TxtBox2" VerticalAlignment="Top" Width="122" Text="Адрес" TextAlignment="Left" TextChanged="TxtBox2_TextChanged"/>
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="19,90,0,0"
-            x:Name="TxtBox3" VerticalAlignment="Top" Width="122" Text="Тип" TextAlignment="Left"/>
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="19,130,0,0"
-            x:Name="TxtBox4" VerticalAlignment="Top" Width="122" Text="Этаж" TextAlignment="Left"/>
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="146,10,0,0"
-                 Name="TxtBox10" VerticalAlignment="Top" Width="492" TextAlignment="Left"/>
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="146,50,0,0"
-                 Name="TxtBox11" VerticalAlignment="Top" Width="492" TextAlignment="Left"/>
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="146,90,0,0"
-                 Name="TxtBox12" VerticalAlignment="Top" Width="492" TextAlignment="Left"/>
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="146,130,0,0"
-                 Name="TxtBox13" VerticalAlignment="Top" Width="492" TextAlignment="Left"/>
+        <Button x:Name="button1" Content="Сохранить" Command="{Binding SaveData}" Margin="116,357,596,20"/>
+        <Button x:Name="button2" Content="Отмена" Command="{x:Static SystemCommands.CloseWindowCommand}" Margin="238,357,474,20" />
+        <TextBox Height="35" HorizontalAlignment="Left" Margin="146,191,0,0"
+            x:Name="TxtBox15" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Login}"/>
+        <Grid Margin="0,21,0,-21">
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,10,0,0"
+                x:Name="TxtBox1" VerticalAlignment="Top" Width="122" Text="Имя" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,50,0,0"
+                x:Name="TxtBox2" VerticalAlignment="Top" Width="122" Text="Адрес" TextAlignment="Left" 
+                     IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,90,0,0"
+                x:Name="TxtBox3" VerticalAlignment="Top" Width="122" Text="Тип" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,130,0,0"
+                x:Name="TxtBox4" VerticalAlignment="Top" Width="122" Text="Этаж" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,10,0,0"
+                x:Name="TxtBox11" VerticalAlignment="Top" Width="492" TextAlignment="Left" DataContext="{Binding Path=PersonCollection }" Text="{Binding Person.Name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,50,0,0"
+                x:Name="TxtBox12" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Adress}"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,90,0,0"
+                x:Name="TxtBox13" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Type}"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,130,0,0"
+                x:Name="TxtBox14" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Floor}"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,170,0,0"
+                x:Name="TxtBox5" VerticalAlignment="Top" Width="122" Text="Логин" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,210,0,0"
+                x:Name="TxtBox16" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Group}"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,210,0,0"
+                x:Name="TxtBox6" VerticalAlignment="Top" Width="122" Text="Группа" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,250,0,0"
+                x:Name="TxtBox7" VerticalAlignment="Top" Width="122" Text="Телефон" TextAlignment="Left" IsReadOnly="True"/>
+            <ListBox Height="Auto" HorizontalAlignment="Left" Margin="146,250,0,0"
+                 Name="listBox1" VerticalAlignment="Top" Width="492"  
+                 ItemsSource="{Binding Phone}">
+            </ListBox>
+        </Grid>
     </Grid>
 </Window>

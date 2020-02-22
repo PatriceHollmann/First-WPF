@@ -8,28 +8,31 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Grid>
-        <Button x:Name="button1" Content="Получение" Click="ButtonGet_Click" Margin="116,357,596,20" 
-                 />
+        <Button x:Name="button1" Content="Получение" Click="ButtonGet_Click" Margin="116,357,596,20"/>
         <Button x:Name="button2" Content="Выгрузка" Click="ButtonSend_Click" Margin="238,357,474,20" />
 
         <ListBox Height="Auto" HorizontalAlignment="Left" Margin="18,10,0,0"
             
-                 Name="listBox1" VerticalAlignment="Top" Width="357"  MouseLeftButtonDown="listBox1_MouseLeftButtonDown">
+                 Name="listBox1" VerticalAlignment="Top" Width="357"  
+                 ItemsSource="{Binding Person}">
+
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Редактировать" CommandTarget="{Binding ElementName=listBox1}" Click="MenuEdit1_Click"></MenuItem>
-                    <MenuItem Header="Удалить" CommandTarget="{Binding ElementName=listBox1}" Click="MenuEdit11_Click"></MenuItem>
+                    <MenuItem Header="Добавить" CommandTarget="{Binding ElementName=listBox1}" Command="{Binding AddCommand}"></MenuItem>
+                    <MenuItem Header="Редактировать" CommandTarget="{Binding ElementName=listBox1}" Command="{Binding EditCommand}"></MenuItem>
+                    <MenuItem Header="Удалить" CommandTarget="{Binding ElementName=listBox1}" Command="{Binding DeleteCommand}"></MenuItem>
                 </ContextMenu>
             </ListBox.ContextMenu>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <ListBox Height="Auto" HorizontalAlignment="Left" Margin="408,10,0,0"
-
                  Name="listBox2" VerticalAlignment="Top" Width="357" >
-            <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Удалить" CommandTarget="{Binding ElementName=listBox2}" Command="Delete">Remove item</MenuItem>
-                </ContextMenu>
-            </ListBox.ContextMenu>
         </ListBox>
     </Grid>
 </Window>
