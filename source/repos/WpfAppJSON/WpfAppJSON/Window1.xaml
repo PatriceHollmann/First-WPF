@@ -9,38 +9,43 @@
     <Grid>
         <Button x:Name="button1" Content="Сохранить" Command="{Binding SaveData}" Margin="116,357,596,20"/>
         <Button x:Name="button2" Content="Отмена" Command="{x:Static SystemCommands.CloseWindowCommand}" Margin="238,357,474,20" />
-        <TextBox Height="35" HorizontalAlignment="Left" Margin="146,191,0,0"
+        <TextBox Height="35" HorizontalAlignment="Left" Margin="167,233,0,0"
             x:Name="TxtBox15" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Login}"/>
         <Grid Margin="0,21,0,-21">
             <TextBox Height="35" HorizontalAlignment="Left" Margin="19,10,0,0"
-                x:Name="TxtBox1" VerticalAlignment="Top" Width="122" Text="Имя" TextAlignment="Left" IsReadOnly="True"/>
+                x:Name="TxtBox1" VerticalAlignment="Top" Width="143" Text="Имя" TextAlignment="Left" IsReadOnly="True"/>
             <TextBox Height="35" HorizontalAlignment="Left" Margin="19,50,0,0"
-                x:Name="TxtBox2" VerticalAlignment="Top" Width="122" Text="Адрес" TextAlignment="Left" 
+                x:Name="TxtBox2" VerticalAlignment="Top" Width="143" Text="Адрес" TextAlignment="Left" 
                      IsReadOnly="True"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,90,0,0"
-                x:Name="TxtBox3" VerticalAlignment="Top" Width="122" Text="Тип" TextAlignment="Left" IsReadOnly="True"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,130,0,0"
-                x:Name="TxtBox4" VerticalAlignment="Top" Width="122" Text="Этаж" TextAlignment="Left" IsReadOnly="True"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,10,0,0"
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,132,0,0"
+                x:Name="TxtBox3" VerticalAlignment="Top" Width="143" Text="Тип" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,172,0,0"
+                x:Name="TxtBox4" VerticalAlignment="Top" Width="143" Text="Этаж" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="167,10,0,0"
                 x:Name="TxtBox11" VerticalAlignment="Top" Width="492" TextAlignment="Left" DataContext="{Binding Path=PersonCollection }" Text="{Binding Person.Name, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,50,0,0"
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="167,50,0,0"
                 x:Name="TxtBox12" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Adress}"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,90,0,0"
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="167,132,0,0"
                 x:Name="TxtBox13" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Type}"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,130,0,0"
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="167,172,0,0"
                 x:Name="TxtBox14" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Floor}"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,170,0,0"
-                x:Name="TxtBox5" VerticalAlignment="Top" Width="122" Text="Логин" TextAlignment="Left" IsReadOnly="True"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="146,210,0,0"
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,212,0,0"
+                x:Name="TxtBox5" VerticalAlignment="Top" Width="143" Text="Логин" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="167,252,0,0"
                 x:Name="TxtBox16" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Group}"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,210,0,0"
-                x:Name="TxtBox6" VerticalAlignment="Top" Width="122" Text="Группа" TextAlignment="Left" IsReadOnly="True"/>
-            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,250,0,0"
-                x:Name="TxtBox7" VerticalAlignment="Top" Width="122" Text="Телефон" TextAlignment="Left" IsReadOnly="True"/>
-            <ListBox Height="Auto" HorizontalAlignment="Left" Margin="146,250,0,0"
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,252,0,0"
+                x:Name="TxtBox6" VerticalAlignment="Top" Width="143" Text="Группа" TextAlignment="Left" IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,292,0,0"
+                x:Name="TxtBox7" VerticalAlignment="Top" Width="143" Text="Телефон" TextAlignment="Left" IsReadOnly="True"/>
+            <ListBox Height="Auto" HorizontalAlignment="Left" Margin="167,292,0,0"
                  Name="listBox1" VerticalAlignment="Top" Width="492"  
                  ItemsSource="{Binding Phone}">
             </ListBox>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="19,90,0,0"
+                x:Name="TxtBox8" VerticalAlignment="Top" Width="143" Text="Наименование адреса" TextAlignment="Left" 
+                IsReadOnly="True"/>
+            <TextBox Height="35" HorizontalAlignment="Left" Margin="167,90,0,0"
+                x:Name="TxtBox18" VerticalAlignment="Top" Width="492" TextAlignment="Left" Text="{Binding Adress}"/>
         </Grid>
     </Grid>
 </Window>
