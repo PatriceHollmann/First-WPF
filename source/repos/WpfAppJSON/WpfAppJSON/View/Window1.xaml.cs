@@ -23,10 +23,5 @@ namespace WpfAppJSON
         {
             InitializeComponent();
         }
-
-        private void TxtBox2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
