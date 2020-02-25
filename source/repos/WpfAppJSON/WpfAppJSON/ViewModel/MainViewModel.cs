@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WpfAppJSON
@@ -27,8 +28,7 @@ namespace WpfAppJSON
       
         public DelegateCommand GetData { get; }
         public DelegateCommand SendData { get; }
-        public DelegateCommand AddCommand { get; }
-        public DelegateCommand<DataStore> SaveData { get; }
+        public DelegateCommand<DataStore> AddCommand { get; }
         public DelegateCommand<DataStore> EditCommand { get; }
         public DelegateCommand<DataStore> DeleteCommand { get; }
 
@@ -60,17 +60,35 @@ namespace WpfAppJSON
                 RaisePropertyChanged("SelectedHouse");
             }
         }
-
-        //private string address;
-        //public string Address
-        //{
-        //    get { return address; }
-        //    set
-        //    {
-        //        this.address = value;
-        //        RaisePropertyChanged("Address");
-        //    }
-        //}
+        private User newPerson;
+        private House newHouse;
+        public User NewPerson
+        {
+            get { return newPerson; }
+            set
+            {
+                newPerson = value;
+                RaisePropertyChanged("NewPerson");
+                if (NewPerson.Phones != null)
+                {
+                    var phoneId = 1;
+                    foreach (var phone in NewPerson.Phones)
+                    {
+                        this.NewPerson.Phones.Select(x => x.Id).Append(phoneId);
+                        phoneId++;
+                    }
+                }
+            }
+        }
+        public House NewHouse
+        {
+            get { return newHouse; }
+            set
+            {
+                newHouse = value;
+                RaisePropertyChanged("NewHouse");
+            }
+        }
         public MainViewModel()
         {
             GetData = new DelegateCommand(() =>
@@ -82,33 +100,28 @@ namespace WpfAppJSON
                         RaisePropertyChanged("Users");
                     }
                 });
+
             SendData = new DelegateCommand(() =>
             {
-
                 this.dataStore.WriteToFile();
             });
-        
-            AddCommand = new DelegateCommand(() =>
+
+            AddCommand = new DelegateCommand<DataStore>(j =>
             {
-                
-                //var address = this.Address;
-                //var addressName = this.Address;
-                //long typ;
-                //collection.AddPerson(name, address, addressName, type, long flors, string login, long group, List<string> phones);
+                this.dataStore.Users.Append(NewPerson);
+                this.dataStore.Houses.Append(NewHouse);
             });
+
             EditCommand = new DelegateCommand<DataStore>(x =>
             {
-                var a =this.SelectedPerson;
+
             });
+
             DeleteCommand = new DelegateCommand<DataStore>(i =>
             {
-                var selectedPerson = this.SelectedPerson;
-               // collection.DeletePerson(this.SelectedPerson);
+                this.dataStore.Users.Remove(this.SelectedPerson);
+                this.dataStore.Houses.Remove(this.SelectedHouse);
             });
-            SaveData = new DelegateCommand<DataStore>(z =>
-            {
-             });
-
         }
     }
 }

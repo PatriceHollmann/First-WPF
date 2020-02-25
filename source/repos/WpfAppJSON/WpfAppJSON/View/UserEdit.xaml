@@ -10,8 +10,25 @@
         <ControlTemplate TargetType="ContentControl">
 
             <Grid Background="White">
-            
-    </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" >
+                    <TextBlock Text="Имя"/>
+                <TextBlock Text="Логин"/>
+                    <TextBlock Text="Группа"/>
+                    <TextBlock Text="Телефон"/>
+                    <TextBlock />
+                    <TextBlock />
+
+
+                </StackPanel>
+                <StackPanel Grid.Column="1"  DataContext="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="600">
+                    <TextBox Text="{Binding Name}" Height="Auto"/>
+                </StackPanel>
+
+            </Grid>
         </ControlTemplate>
     </ContentControl.Template>
 </UserControl>

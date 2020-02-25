@@ -22,8 +22,8 @@
             <StackPanel
                 Grid.Row="1"
                 Orientation="Horizontal">
-                <Button  Content="Получение" Command="{Binding GetData}"/>
-                <Button  Content="Выгрузка" Command="{Binding SendData}" />
+                <Button  Content="Получение" Command="{Binding GetData}" Width="59"/>
+                <Button  Content="Выгрузка" Command="{Binding SendData}" Width="59" />
             </StackPanel>
 
             <Grid>
@@ -44,7 +44,7 @@
                     <ListBox.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Добавить" CommandTarget="{Binding ElementName=listBox1}" Command="{Binding AddCommand}"></MenuItem>
-                            <MenuItem Header="Редактировать" CommandTarget="{Binding ElementName=listBox1}" Click="myCtrls:UserEdit"></MenuItem>
+                            <MenuItem Header="Редактировать" CommandTarget="{Binding ElementName=listBox1}" ></MenuItem>
                             <MenuItem Header="Удалить" CommandTarget="{Binding ElementName=listBox1}" Command="{Binding DeleteCommand}"></MenuItem>
                         </ContextMenu>
                     </ListBox.ContextMenu>
@@ -56,13 +56,15 @@
             <StackPanel Grid.Column="1" DataContext="{Binding SelectedPerson}" Margin="22,0,0,0">
                 <TextBlock Text="Имя"/>
                 <TextBlock x:Name="UserName"  Text="{Binding Name}"/>
-
-
                 <TextBlock Text="Логин"/>
                 <TextBlock x:Name="UserLogin" Text="{Binding Login}"/>
                 <TextBlock Text="Группа"/>
                 <TextBlock x:Name="UserGroup" Text="{Binding Group}"/>
                 <TextBlock Text="Телефон"/>
+                <TextBlock/>
+                <TextBlock/>
+                <TextBlock/>
+                <TextBlock/>
 
             </StackPanel>
             <StackPanel  DataContext="{Binding SelectedHouse}" Margin="22,0,0,0">
@@ -79,7 +81,7 @@
             </StackPanel>
         </StackPanel>
 
-        <ListBox Height="Auto" HorizontalAlignment="Left" Margin="22,250,0,0" DataContext="{Binding SelectedPerson}"
+        <ListBox Height="Auto" HorizontalAlignment="Left" Margin="10,120,0,0" DataContext="{Binding SelectedPerson}"
                  ItemsSource="{Binding Phones}"
             SelectedItem="{Binding SelectedPerson}"
             x:Name="listBoxPhone" VerticalAlignment="Top" Width="458" Grid.Column="1" >
