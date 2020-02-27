@@ -44,7 +44,7 @@
                     <ListBox.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Добавить" CommandTarget="{Binding ElementName=listBox1}" Command="{Binding AddCommand}"></MenuItem>
-                            <MenuItem Header="Редактировать" CommandTarget="{Binding ElementName=listBox1}" ></MenuItem>
+                            <MenuItem Header="Редактировать" CommandTarget="{Binding ElementName=listBox1}" Command="{Binding EditCommand}"></MenuItem>
                             <MenuItem Header="Удалить" CommandTarget="{Binding ElementName=listBox1}" Command="{Binding DeleteCommand}"></MenuItem>
                         </ContextMenu>
                     </ListBox.ContextMenu>

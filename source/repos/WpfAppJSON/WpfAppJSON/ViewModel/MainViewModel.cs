@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace WpfAppJSON
 {
@@ -28,8 +29,8 @@ namespace WpfAppJSON
       
         public DelegateCommand GetData { get; }
         public DelegateCommand SendData { get; }
-        public DelegateCommand<DataStore> AddCommand { get; }
-        public DelegateCommand<DataStore> EditCommand { get; }
+        public DelegateCommand AddCommand { get; }
+        public DelegateCommand EditCommand { get; }
         public DelegateCommand<DataStore> DeleteCommand { get; }
 
         private User selectedPerson;
@@ -74,7 +75,7 @@ namespace WpfAppJSON
                     var phoneId = 1;
                     foreach (var phone in NewPerson.Phones)
                     {
-                        this.NewPerson.Phones.Select(x => x.Id).Append(phoneId);
+                        phone.Id = phoneId;
                         phoneId++;
                     }
                 }
@@ -89,6 +90,19 @@ namespace WpfAppJSON
                 RaisePropertyChanged("NewHouse");
             }
         }
+        //Window wnd = new Window();
+        //// UserControlModel userControlModel = new UserControlModel();
+        //protected bool Close()
+        //{
+        //    var result = false;
+        //    if (wnd != null)
+        //    {
+        //        wnd.Close();
+        //        wnd = null;
+        //        result = true;
+        //    }
+        //    return result;
+
         public MainViewModel()
         {
             GetData = new DelegateCommand(() =>
@@ -106,21 +120,30 @@ namespace WpfAppJSON
                 this.dataStore.WriteToFile();
             });
 
-            AddCommand = new DelegateCommand<DataStore>(j =>
+            AddCommand = new DelegateCommand(() =>
             {
-                this.dataStore.Users.Append(NewPerson);
-                this.dataStore.Houses.Append(NewHouse);
+                var userControl = new UserControlModel();
+                var userWindow = new Window1();
+                SelectedPerson = null;
+                SelectedHouse = null;
+                userWindow.DataContext = userControl;
+                userWindow.ShowDialog();
             });
 
-            EditCommand = new DelegateCommand<DataStore>(x =>
+            EditCommand = new DelegateCommand(() =>
             {
-
+                var userControl = new UserControlModel();
+                var userWindow = new Window1();
+                userWindow.DataContext = userControl;
+                userWindow.ShowDialog();
             });
 
             DeleteCommand = new DelegateCommand<DataStore>(i =>
             {
-                this.dataStore.Users.Remove(this.SelectedPerson);
-                this.dataStore.Houses.Remove(this.SelectedHouse);
+                this.dataStore.Users.Remove(SelectedPerson);
+                this.dataStore.Houses.Remove(SelectedHouse);
+                RaisePropertyChanged("Users");
+                RaisePropertyChanged("Houses");
             });
         }
     }

@@ -58,6 +58,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -77,9 +78,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="JSON.cs" />
+    <Compile Include="UserControlCommands.cs" />
+    <Compile Include="UserControlModel.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\UserEdit.xaml.cs">
-      <DependentUpon>UserEdit.xaml</DependentUpon>
+    <Compile Include="View\UserControl.xaml.cs">
+      <DependentUpon>UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -98,7 +102,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\UserEdit.xaml">
+    <Page Include="View\UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
