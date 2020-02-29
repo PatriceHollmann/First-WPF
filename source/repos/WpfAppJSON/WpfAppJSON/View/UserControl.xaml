@@ -12,22 +12,61 @@
             <Grid Background="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" >
-                    <TextBlock Text="Имя"/>
-                <TextBlock Text="Логин"/>
-                    <TextBlock Text="Группа"/>
-                    <TextBlock Text="Телефон"/>
-                    <TextBlock />
-                    <TextBlock />
-
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="0" Grid.RowSpan="2" ShowGridLines="True" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+ 
+                    <TextBlock Text="Имя" Grid.Row="0"/>
+                    <TextBlock Text="Логин" Grid.Row="1"/>
+                    <TextBlock Text="Группа" Grid.Row="2"/>
+                    <TextBlock Text="Телефон1" Grid.Row="3"/>
+                    <TextBlock Text="Телефон2" Grid.Row="4"/>
+                    <TextBlock Text="Телефон3" Grid.Row="5"/>
+                    <TextBlock Text="Адрес" Grid.Row="6"/>
+                    <TextBlock Text="Наименование адреса" Grid.Row="7"/>
+                    <TextBlock Text="Тип" Grid.Row="8"/>
+                    <TextBlock Text="Этаж" Grid.Row="9"/>
+                </Grid>
+                <Grid ShowGridLines="True" Grid.Column="1" Grid.Row="0">
+                    <StackPanel DataContext="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="533" >
+                        <TextBox Text="{Binding Name}" Height="20"/>
+                        <TextBox Text="{Binding Login}" Height="20"/>
+                        <TextBox Text="{Binding Group}" Height="20"/>
+                        <TextBox Text="{Binding Value}" Height="20"/>
+                        <TextBox Text="{Binding Value}" Height="20"/>
+                        <TextBox Text="{Binding Value}" Height="20"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <StackPanel DataContext="{Binding SelectedHouse}" HorizontalAlignment="Left" Width="533">
+                        <TextBox Text="{Binding Address}" Height="20"/>
+                        <TextBox Text="{Binding Name}" Height="20"/>
+                        <TextBox Text="{Binding Type}" Height="20"/>
+                        <TextBox Text="{Binding Flors}" Height="20"/>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom">
+                    <Button  Content="Добавить" Command="{Binding AddPerson}" Width="70"/>
+                    <Button  Content="Изменить" Command="{Binding EditPerson}" Width="70" Visibility="Hidden"/>
+                    <Button  Content="Отмена" Command="{Binding CommandClose}" Width="70" />
                 </StackPanel>
-                <StackPanel Grid.Column="1"  DataContext="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="600">
-                    <TextBox Text="{Binding Name}" Height="Auto"/>
-                </StackPanel>
-
             </Grid>
         </ControlTemplate>
     </ContentControl.Template>

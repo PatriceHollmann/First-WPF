@@ -65,9 +65,11 @@
                 <TextBlock/>
                 <TextBlock/>
                 <TextBlock/>
+                <TextBlock/>
+                <TextBlock/>
 
             </StackPanel>
-            <StackPanel  DataContext="{Binding SelectedHouse}" Margin="22,0,0,0">
+            <StackPanel DataContext="{Binding SelectedHouse}" Margin="22,0,0,0">
                 <TextBlock Text="Адрес"/>
                 <TextBlock x:Name="HouseAddress" Text="{Binding Address}"/>
                 <TextBlock Text="Наименование адреса"/>
@@ -81,7 +83,7 @@
             </StackPanel>
         </StackPanel>
 
-        <ListBox Height="Auto" HorizontalAlignment="Left" Margin="10,120,0,0" DataContext="{Binding SelectedPerson}"
+        <ListBox Height="Auto" HorizontalAlignment="Left" Margin="22,122,0,0" DataContext="{Binding SelectedPerson}"
                  ItemsSource="{Binding Phones}"
             SelectedItem="{Binding SelectedPerson}"
             x:Name="listBoxPhone" VerticalAlignment="Top" Width="458" Grid.Column="1" >

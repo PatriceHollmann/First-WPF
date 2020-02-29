@@ -25,10 +25,11 @@ namespace WpfAppJSON
                 RaisePropertyChanged("Users");
                 RaisePropertyChanged("Houses");
             });
-            //CommandClose = new DelegateCommand(() =>
-            //{
-            //    Close();
-            //});
+            CommandClose = new DelegateCommand(() =>
+            {
+                if (ViewModelBase.wnd != null)
+                    ViewModelBase.CloseWindow();
+            });
         }
     }
 }

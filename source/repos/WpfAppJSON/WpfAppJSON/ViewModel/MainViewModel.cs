@@ -90,28 +90,20 @@ namespace WpfAppJSON
                 RaisePropertyChanged("NewHouse");
             }
         }
-        //Window wnd = new Window();
-        //// UserControlModel userControlModel = new UserControlModel();
-        //protected bool Close()
-        //{
-        //    var result = false;
-        //    if (wnd != null)
-        //    {
-        //        wnd.Close();
-        //        wnd = null;
-        //        result = true;
-        //    }
-        //    return result;
-
+        //UserControlModel userControl = null;
+        //Window1 userWindow=null;
         public MainViewModel()
         {
             GetData = new DelegateCommand(() =>
                 {
-                    this.dataStore = DataStore.Parsing();
-                    foreach(var user in dataStore.Users)
+                    if (dataStore is null)
                     {
-                        this.Users.Add(user);
-                        RaisePropertyChanged("Users");
+                        this.dataStore = DataStore.Parsing();
+                        foreach (var user in dataStore.Users)
+                        {
+                            this.Users.Add(user);
+                            RaisePropertyChanged("Users");
+                        }
                     }
                 });
 
@@ -122,20 +114,24 @@ namespace WpfAppJSON
 
             AddCommand = new DelegateCommand(() =>
             {
-                var userControl = new UserControlModel();
+                var userControl = new MainViewModel();
                 var userWindow = new Window1();
                 SelectedPerson = null;
                 SelectedHouse = null;
+               // ViewModelBase.OpenWindow(userControl);
                 userWindow.DataContext = userControl;
                 userWindow.ShowDialog();
+                ViewModelBase.wnd = userWindow;
             });
 
             EditCommand = new DelegateCommand(() =>
             {
-                var userControl = new UserControlModel();
+                var userControl = new MainViewModel();
                 var userWindow = new Window1();
+                //ViewModelBase.OpenWindow(userControl);
                 userWindow.DataContext = userControl;
                 userWindow.ShowDialog();
+                ViewModelBase.wnd = userWindow;
             });
 
             DeleteCommand = new DelegateCommand<DataStore>(i =>
