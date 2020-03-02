@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfAppJSON.View"
+             xmlns:local="clr-namespace:WpfAppJSON"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ContentControl.Template>
@@ -45,17 +45,23 @@
                     <TextBlock Text="Этаж" Grid.Row="9"/>
                 </Grid>
                 <Grid ShowGridLines="True" Grid.Column="1" Grid.Row="0">
-                    <StackPanel DataContext="{Binding SelectedPerson}" HorizontalAlignment="Left" Width="533" >
+                    <StackPanel DataContext="{Binding EditPerson}" HorizontalAlignment="Left" Width="533" >
                         <TextBox Text="{Binding Name}" Height="20"/>
                         <TextBox Text="{Binding Login}" Height="20"/>
                         <TextBox Text="{Binding Group}" Height="20"/>
-                        <TextBox Text="{Binding Value}" Height="20"/>
-                        <TextBox Text="{Binding Value}" Height="20"/>
-                        <TextBox Text="{Binding Value}" Height="20"/>
+                        <ListBox Height="60">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Value}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="1">
-                    <StackPanel DataContext="{Binding SelectedHouse}" HorizontalAlignment="Left" Width="533">
+                    <StackPanel DataContext="{Binding EditHouse}" HorizontalAlignment="Left" Width="533">
                         <TextBox Text="{Binding Address}" Height="20"/>
                         <TextBox Text="{Binding Name}" Height="20"/>
                         <TextBox Text="{Binding Type}" Height="20"/>
@@ -63,8 +69,9 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom">
-                    <Button  Content="Добавить" Command="{Binding AddPerson}" Width="70"/>
-                    <Button  Content="Изменить" Command="{Binding EditPerson}" Width="70" Visibility="Hidden"/>
+                    <Button  Content="Добавить" Command="{Binding AddPerson}" 
+                             CommandParameter="{Binding ElementName=EditWindow}"
+                             Width="70"/>
                     <Button  Content="Отмена" Command="{Binding CommandClose}" Width="70" />
                 </StackPanel>
             </Grid>

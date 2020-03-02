@@ -68,7 +68,10 @@ namespace WpfAppJSON
             public long Flors { get; set; }
             [JsonProperty("user_id")]
             public int UserId { get; set; }
-
+        public bool isValid()
+        {
+            return !string.IsNullOrEmpty(Name);
+        }
         public override string ToString()
             {
                 return Name;

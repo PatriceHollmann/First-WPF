@@ -61,37 +61,6 @@ namespace WpfAppJSON
                 RaisePropertyChanged("SelectedHouse");
             }
         }
-        private User newPerson;
-        private House newHouse;
-        public User NewPerson
-        {
-            get { return newPerson; }
-            set
-            {
-                newPerson = value;
-                RaisePropertyChanged("NewPerson");
-                if (NewPerson.Phones != null)
-                {
-                    var phoneId = 1;
-                    foreach (var phone in NewPerson.Phones)
-                    {
-                        phone.Id = phoneId;
-                        phoneId++;
-                    }
-                }
-            }
-        }
-        public House NewHouse
-        {
-            get { return newHouse; }
-            set
-            {
-                newHouse = value;
-                RaisePropertyChanged("NewHouse");
-            }
-        }
-        //UserControlModel userControl = null;
-        //Window1 userWindow=null;
         public MainViewModel()
         {
             GetData = new DelegateCommand(() =>
@@ -99,11 +68,7 @@ namespace WpfAppJSON
                     if (dataStore is null)
                     {
                         this.dataStore = DataStore.Parsing();
-                        foreach (var user in dataStore.Users)
-                        {
-                            this.Users.Add(user);
-                            RaisePropertyChanged("Users");
-                        }
+                        UpdateUsers();
                     }
                 });
 
@@ -114,33 +79,46 @@ namespace WpfAppJSON
 
             AddCommand = new DelegateCommand(() =>
             {
-                var userControl = new MainViewModel();
-                var userWindow = new Window1();
-                SelectedPerson = null;
-                SelectedHouse = null;
-               // ViewModelBase.OpenWindow(userControl);
-                userWindow.DataContext = userControl;
+                var dataContext = new EditUserViewModel(dataStore); 
+                var userWindow = new Window1(dataContext);
+                userWindow.DataContext = dataContext;
+                userWindow.Closed += UserWindow_Closed;
                 userWindow.ShowDialog();
-                ViewModelBase.wnd = userWindow;
             });
 
             EditCommand = new DelegateCommand(() =>
             {
-                var userControl = new MainViewModel();
-                var userWindow = new Window1();
-                //ViewModelBase.OpenWindow(userControl);
-                userWindow.DataContext = userControl;
+                var dataContext = new EditUserViewModel(dataStore, this.SelectedPerson, this.SelectedHouse);
+                var userWindow = new Window1(dataContext);
+                userWindow.DataContext = dataContext;
+                RaisePropertyChanged("Users");
+                userWindow.Closed += UserWindow_Closed;
                 userWindow.ShowDialog();
-                ViewModelBase.wnd = userWindow;
             });
 
             DeleteCommand = new DelegateCommand<DataStore>(i =>
             {
                 this.dataStore.Users.Remove(SelectedPerson);
                 this.dataStore.Houses.Remove(SelectedHouse);
+                this.Users.Remove(SelectedPerson);
                 RaisePropertyChanged("Users");
                 RaisePropertyChanged("Houses");
             });
+        }
+        public void UpdateUsers() {
+            this.Users.Clear();
+            foreach (var user in dataStore.Users)
+            {
+                this.Users.Add(user);
+            }
+            RaisePropertyChanged("Users");
+        }
+     
+        private void UserWindow_Closed(object sender, EventArgs e)
+        {
+            UpdateUsers();
+            RaisePropertyChanged("Users");
+            RaisePropertyChanged("Houses");
         }
     }
 }

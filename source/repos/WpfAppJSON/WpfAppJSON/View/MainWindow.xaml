@@ -22,8 +22,8 @@
             <StackPanel
                 Grid.Row="1"
                 Orientation="Horizontal">
-                <Button  Content="Получение" Command="{Binding GetData}" Width="59"/>
-                <Button  Content="Выгрузка" Command="{Binding SendData}" Width="59" />
+                <Button  Content="Получение" Command="{Binding GetData}" Width="70"/>
+                <Button  Content="Выгрузка" Command="{Binding SendData}" Width="70" />
             </StackPanel>
 
             <Grid>
@@ -85,12 +85,12 @@
 
         <ListBox Height="Auto" HorizontalAlignment="Left" Margin="22,122,0,0" DataContext="{Binding SelectedPerson}"
                  ItemsSource="{Binding Phones}"
-            SelectedItem="{Binding SelectedPerson}"
-            x:Name="listBoxPhone" VerticalAlignment="Top" Width="458" Grid.Column="1" >
+            
+                 VerticalAlignment="Top" Width="458" Grid.Column="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding Value}"/>
+                        <Label Content="{Binding Path=Value}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

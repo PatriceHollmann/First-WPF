@@ -13,12 +13,8 @@ namespace WpfAppJSON
         {
             public void ShowPatientWindow()
             {
-                var userControl = new UserControlModel();
-                var userWindow = new Window1();
+              
 
-                userWindow.DataContext = userControl;
-
-                userWindow.ShowDialog();
             }
         }
     }
