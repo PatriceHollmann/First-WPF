@@ -66,25 +66,26 @@ namespace WpfAppJSON
                     }
                     if (isNewHouse)
                     {
-                        if (SelectedHouse.isValid())
+                        if (EditHouse.isValid())
                         {
                             dataStore.Houses.Add(EditHouse);
                         }
                         RaiseCloseRequest();
                     }
-                    else {
-                        if (!SelectedHouse.isValid())
-                        {
-                            MessageBox.Show("Данные дома не корректны.");
-                        }
-                        else
-                        {
-                            SelectedHouse.Address = EditHouse.Address;
+                    else
+                    {
+                    if (SelectedHouse.isValid())
+                    {
+                        SelectedHouse.Address = EditHouse.Address;
                             SelectedHouse.Flors = EditHouse.Flors;
                             SelectedHouse.Name = EditHouse.Name;
                             SelectedHouse.Type = EditHouse.Type;
                             SelectedHouse.UserId = EditHouse.UserId;
                             RaiseCloseRequest();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Данные дома не корректны.");
                         }
                     }
                 });

@@ -82,6 +82,8 @@ namespace WpfAppJSON
                 var dataContext = new EditUserViewModel(dataStore); 
                 var userWindow = new Window1(dataContext);
                 userWindow.DataContext = dataContext;
+                RaisePropertyChanged("Users");
+                RaisePropertyChanged("Houses");
                 userWindow.Closed += UserWindow_Closed;
                 userWindow.ShowDialog();
             });
@@ -92,6 +94,7 @@ namespace WpfAppJSON
                 var userWindow = new Window1(dataContext);
                 userWindow.DataContext = dataContext;
                 RaisePropertyChanged("Users");
+                RaisePropertyChanged("Houses");
                 userWindow.Closed += UserWindow_Closed;
                 userWindow.ShowDialog();
             });

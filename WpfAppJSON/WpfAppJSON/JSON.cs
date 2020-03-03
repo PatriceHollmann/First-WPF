@@ -70,7 +70,7 @@ namespace WpfAppJSON
             public int UserId { get; set; }
         public bool isValid()
         {
-            return !string.IsNullOrEmpty(Name);
+            return !string.IsNullOrEmpty(Address);
         }
         public override string ToString()
             {
