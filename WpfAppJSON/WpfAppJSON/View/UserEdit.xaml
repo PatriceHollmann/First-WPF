@@ -17,9 +17,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Column="0" Grid.RowSpan="2" ShowGridLines="True" >
+                <Grid Grid.Column="0" Grid.RowSpan="3" ShowGridLines="True" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20" />
                         <RowDefinition Height="20" />
@@ -32,7 +33,6 @@
                         <RowDefinition Height="20" />
                         <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
- 
                     <TextBlock Text="Имя" Grid.Row="0"/>
                     <TextBlock Text="Логин" Grid.Row="1"/>
                     <TextBlock Text="Группа" Grid.Row="2"/>
@@ -44,31 +44,52 @@
                     <TextBlock Text="Тип" Grid.Row="8"/>
                     <TextBlock Text="Этаж" Grid.Row="9"/>
                 </Grid>
-                <Grid ShowGridLines="True" Grid.Column="1" Grid.Row="0">
+                <Grid Grid.Column="1" Grid.RowSpan="3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="80" />
+                    </Grid.RowDefinitions>
+
+                    <Grid  Grid.Column="1" Grid.Row="0">
                     <StackPanel DataContext="{Binding EditPerson}" HorizontalAlignment="Left" Width="533" >
                         <TextBox Text="{Binding Name}" Height="20"/>
                         <TextBox Text="{Binding Login}" Height="20"/>
                         <TextBox Text="{Binding Group}" Height="20"/>
-                        <ListBox Height="60">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="{Binding Value}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                                </ListBox.ItemTemplate>
-                        </ListBox>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Column="1" Grid.Row="1">
+                    <ListBox Height="60"  Grid.Row="1" DataContext="{Binding EditPerson}" ItemsSource="{Binding Phones, Mode=TwoWay}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Value, Mode=TwoWay}">
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsFocused" Value="True">
+                                                    <Setter Property="Foreground" Value="Green"/>
+                                                    <Setter Property="IsReadOnly" Value="False" />
+                                                </Trigger>
+                                                <Trigger Property="IsFocused" Value="False">
+                                                    <Setter Property="Foreground" Value="Red"/>
+                                                    <Setter Property="IsReadOnly" Value="True" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid Grid.Row="2">
                     <StackPanel DataContext="{Binding EditHouse}" HorizontalAlignment="Left" Width="533">
                         <TextBox Text="{Binding Address}" Height="20"/>
                         <TextBox Text="{Binding Name}" Height="20"/>
                         <TextBox Text="{Binding Type}" Height="20"/>
                         <TextBox Text="{Binding Flors}" Height="20"/>
                     </StackPanel>
+                    </Grid>
                 </Grid>
-                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom">
+                <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Bottom">
                     <Button  Content="Добавить" Command="{Binding AddPerson}" 
                              CommandParameter="{Binding ElementName=EditWindow}"
                              Width="70"/>

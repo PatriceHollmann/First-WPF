@@ -67,7 +67,6 @@
                 <TextBlock/>
                 <TextBlock/>
                 <TextBlock/>
-
             </StackPanel>
             <StackPanel DataContext="{Binding SelectedHouse}" Margin="22,0,0,0">
                 <TextBlock Text="Адрес"/>
@@ -77,9 +76,7 @@
                 <TextBlock Text="Тип"/>
                 <TextBlock x:Name="HouseType" Text="{Binding Path=Type,Mode=TwoWay}"/>
                 <TextBlock Text="Этаж"/>
-
                 <TextBlock x:Name="HouseFlors" Text="{Binding Flors}"/>
-
             </StackPanel>
         </StackPanel>
 
@@ -90,7 +87,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding Path=Value}"/>
+                        <Label Content="{Binding Path=Value, Mode=TwoWay}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
