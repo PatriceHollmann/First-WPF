@@ -12,8 +12,6 @@ namespace WpfAppJSON
     {
         public List<House> Houses { get; set; }
         public List<User> Users { get; set; }
-
-    
         public DataStore(List<House> _houses, List<User> _users)
         {
             Users = _users??new List<User>();

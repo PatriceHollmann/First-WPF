@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:WpfAppJSON"
+         
+             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -67,19 +70,55 @@
                             <TextBox Text="{Binding Group}" Height="20"/>
                         </StackPanel>
                     </Grid>
-                    <ListBox Height="60"  Grid.Row="1" DataContext="{Binding EditPerson}" ItemsSource="{Binding Phones}">
-                        <Style TargetType="ListBoxItem">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=phone}" Value=" ">
-                                    <Setter Property="IsEnabled" Value="True" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
+                 
+                    
+
+                    <ListBox Height="60"  Grid.Row="1" 
+                             ItemsSource="{Binding Phones}"
+                          
+                             >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding PhoneSelectionChange}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.Resources>
+                            <Style TargetType="ListBoxItem">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=Value}" Value=" ">
+                                        <Setter Property="IsEnabled" Value="True" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                            </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBox x:Name="phone" Text="{Binding Value, Mode=TwoWay}">
 
-                                </TextBox>
+                                <StackPanel>
+                                    <TextBox x:Name="phone" Text="{Binding Value, Mode=TwoWay}" 
+                                         AcceptsReturn="True" TextWrapping = "Wrap"  DataContext="{Binding Path=Self}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="LostFocus">
+                                                <i:InvokeCommandAction  Command="{Binding LostFocusCommand}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+
+                                    </TextBox>
+                                    <Button 
+                                            
+                                            Content="ClickMe">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:InvokeCommandAction  Command="{Binding LostFocusCommand}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+
+                                    </Button>
+
+                                </StackPanel>
+                                
+                            
+
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

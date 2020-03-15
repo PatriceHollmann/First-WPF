@@ -12,7 +12,7 @@ namespace WpfAppJSON
     }
     public class EditUserViewModel : BindableBase, ICloseable
     {
-
+        public EditUserViewModel Self => this;
         public event EventHandler CloseRequest;
         protected void RaiseCloseRequest()
         {
@@ -22,12 +22,24 @@ namespace WpfAppJSON
         }
         public DelegateCommand CommandClose { get; }
         public DelegateCommand AddPerson { get; }
+        public DelegateCommand _LostFocusCommand;
+        public DelegateCommand LostFocusCommand
+        { get { 
+                return _LostFocusCommand;
+    } }
+       
         public House SelectedHouse { get; set; }
         public User SelectedPerson { get; set; }
         public House EditHouse { get; set; }
         public User EditPerson { get; set; }
+        public Phone newPhone = new Phone();
+        public Phone[] Phones { get {
+                return EditPerson.Phones.Concat(new[] { newPhone }).ToArray();
+            } }
         public bool isNewUser { get; set; }
         public bool isNewHouse { get; set; }
+
+
         public EditUserViewModel(DataStore dataStore,User user=null,House house=null)
         {
             SelectedPerson = user ?? new User();
@@ -92,6 +104,14 @@ namespace WpfAppJSON
             CommandClose = new DelegateCommand(() =>
             {
                 RaiseCloseRequest();
+            });
+            _LostFocusCommand = new DelegateCommand(() =>
+            {
+                Console.WriteLine("");
+              //  if (!= "" && ) {
+               //     EditPerson.Phones.Append(newPhone);
+               //     newPhone = new Phone();
+               // }
             });
         }
     }

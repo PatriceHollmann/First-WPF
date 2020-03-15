@@ -24,5 +24,9 @@ namespace WpfAppJSON.View
         {
             InitializeComponent();
         }
+        public void OnPhoneTextFocus(UserControl e) {
+            Console.WriteLine("df");
+
+        }
     }
 }
